@@ -1,7 +1,8 @@
 // Enemies our player must avoid
 var canvasWidth = 505,
     blockWidth = 101,
-    blockHeight = 79;
+    blockHeight = 79,
+    score = 0;
 
 var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
@@ -76,6 +77,7 @@ Player.prototype.handleInput = function(allowedKeys) {
         this.y -= blockHeight;
     } else if (allowedKeys == 'up' && this.y > blockHeight -10) {
         this.reset();
+        score += 1;
     }
 };
 // Now instantiate your objects.
@@ -84,8 +86,9 @@ Player.prototype.handleInput = function(allowedKeys) {
 
 var allEnemies = [];
 for (var i = 0; i < 3; i++) {
-    var randomSpeed = 30 + Math.floor(Math.random() * 70) + Math.floor(Math.random() *30);
-    allEnemies.push(new Enemy(-90, 50 + 90 *i, randomSpeed));
+    var randomSpeed = 30 + Math.floor(Math.random() * 70) + Math.floor(Math.random() *30),
+        randomx = -90 + Math.floor(Math.random() * -20);
+    allEnemies.push(new Enemy(randomx, 50 + 90 *i, randomSpeed));
 }
 
 var player = new Player();
@@ -103,6 +106,8 @@ var checkCollisions = function() {
     }
 
 };
+
+$('.score').append(score);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
