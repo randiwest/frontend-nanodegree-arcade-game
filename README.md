@@ -1,6 +1,13 @@
-frontend-nanodegree-arcade-game
+Frontend Nanodegree Arcade Fame
+
+Frogger
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Instructions:
 
-for self-checking their submission.
+1. Open index.html in the browser of your choice.
+2. Use the arrow keys to navigate your character to the water while avoiding the bugs.
+
+References:
+
+Collision algorithm was taken from here: https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
