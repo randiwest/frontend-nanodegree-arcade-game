@@ -23,7 +23,8 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        paused = false;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -56,7 +57,9 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        if (paused == false) {
+            win.requestAnimationFrame(main);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -136,7 +139,6 @@ var Engine = (function(global) {
             }
         }
 
-
         renderEntities();
     }
 
@@ -161,6 +163,16 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+    }
+
+    global.togglePause = function() {
+        if (paused == true) {
+            paused = false;
+            lastTime = Date.now();
+            win.requestAnimationFrame(main);
+        } else {
+            paused = true;
+        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to

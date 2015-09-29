@@ -78,6 +78,9 @@ Player.prototype.handleInput = function(allowedKeys) {
     } else if (allowedKeys == 'up' && this.y > blockHeight -10) {
         this.reset();
         score += 1;
+        $('.score').text(score);
+    } else if (allowedKeys == 'space') {
+        togglePause();
     }
 };
 // Now instantiate your objects.
@@ -102,12 +105,12 @@ var checkCollisions = function() {
             player.height + player.y > allEnemies[i].y) 
         {
             player.reset();
+            score = 0;
+            $('.score').text(score);
         }
     }
 
 };
-
-$('.score').append(score);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -116,7 +119,8 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        32: 'space'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
