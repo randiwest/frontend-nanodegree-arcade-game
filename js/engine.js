@@ -19,12 +19,16 @@ var Engine = (function(global) {
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
      */
+
+    /* Added global paused variable for pausing functionality. ✓
+     */
+    global.paused = false;
+
     var doc = global.document,
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime,
-        paused = false;
+        lastTime;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -56,8 +60,10 @@ var Engine = (function(global) {
 
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
+         * Added a condition to prevent the function from running if the game
+         * is paused. ✓
          */
-        if (paused == false) {
+        if (paused === false) {
             win.requestAnimationFrame(main);
         }
     }
@@ -165,15 +171,18 @@ var Engine = (function(global) {
         // noop
     }
 
+    /* This function toggles the state of the game when called.  If paused
+     * it will unpause the game  and vice versa. ✓
+     */
     global.togglePause = function() {
-        if (paused == true) {
+        if (paused === true) {
             paused = false;
             lastTime = Date.now();
             win.requestAnimationFrame(main);
         } else {
             paused = true;
         }
-    }
+    };
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
