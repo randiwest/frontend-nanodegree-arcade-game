@@ -1,4 +1,4 @@
-Frontend Nanodegree Arcade Fame
+Frontend Nanodegree Arcade Game
 
 Frogger
 ===============================
